@@ -8,7 +8,8 @@ sys.setrecursionlimit(4096)
 
 def chiffrer(g,n,m,uid):
     x = generateZn(n)
-    print("x = ",x)
+    #x = 287
+    #print("x = ",x)
 
     t = n**2
     gm = calcbigpower(g,m,t)
