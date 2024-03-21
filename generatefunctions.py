@@ -88,8 +88,10 @@ def generate(nbserv,tm):
     q,q_prim = find_prime()
 
     print("différence |p-q| :",math.log2(abs(p-q)))
-    while q == p:
+    while math.log2(abs(p-q)) < 1022:
+        p,p_prim = find_prime()
         q,q_prim = find_prime()
+        print("différence |p-q| :",math.log2(abs(p-q)))
 
     #print("On calcule m,n,beta,a et b...")
     m = p_prim*q_prim
