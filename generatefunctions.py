@@ -81,17 +81,17 @@ def func_sk(x,liste_ai):
         val += liste_ai[j]*(x**j)
     return val
 
-def generate(nbserv,tm):
+def generate(nbserv,tm,delta):
     #print("On cherche p et q...")
     p,p_prim = find_prime()
     #print("p calculé...")
     q,q_prim = find_prime()
 
-    print("différence |p-q| :",math.log2(abs(p-q)))
+    #print("différence |p-q| :",math.log2(abs(p-q)))
     while math.log2(abs(p-q)) < 1022:
         p,p_prim = find_prime()
         q,q_prim = find_prime()
-        print("différence |p-q| :",math.log2(abs(p-q)))
+        #print("différence |p-q| :",math.log2(abs(p-q)))
 
     #print("On calcule m,n,beta,a et b...")
     m = p_prim*q_prim
@@ -122,6 +122,12 @@ def generate(nbserv,tm):
     #teta2 = ((pow(g,betam)-1)//n)%n
     #print("teta :",teta)
 
+    k = generateZn(n)
+
+    #print("voici le générateur :",k)
+
+    v = k**2
+
     #print("On génère les ski...")
     nm = n*m
     liste_ai = [random.randrange(0,nm) for _ in range(tm+1)]
@@ -129,20 +135,29 @@ def generate(nbserv,tm):
     liste_ski = {}
     for i in range(1,nbserv+1):
         liste_ski[str(i)] = func_sk(i,liste_ai)%nm
+    liste_vi = []
+    for si in liste_ski.keys():
+        liste_vi.append(pow(v,delta*liste_ski[si],t))
+    with open("vi.json","w") as write_file:
+        json.dump(liste_vi, write_file, indent=4)
     #print("liste ai : ",liste_ai)
-    pubkey = {"n":n,"g":g,"teta":teta}
+    pubkey = {"n":n,"g":g,"teta":teta,"v":v}
     #liste_ski = {"1":21435,"2":20371,"3":48419,"4":34255}
     #print("n = ",n,"\np = ",p," | q = ",q," | pprime = ",p_prim," | qprime",q_prim," | m = ",m,"\nbeta = ",beta," | ","a = ",a," | ","b = ",b,"\ng = ",g)
     with open("pubkey.json","w") as write_file:
         json.dump(pubkey,write_file,indent=4)
     with open("secretkeys.json","w") as write_file:
         json.dump(liste_ski,write_file,indent=4)
-    print("Fin de la génération !")
+   #print("Fin de la génération !")
 
-def init_votant():
-    liste_votant = [i for i in range(100)]
 
-    votes = {liste_votant[votant]:None for votant in liste_votant}
+def init_votant(candidats):
+    liste_votes = []
 
-    with open("votes.json","w") as write_file:
-            json.dump(votes,write_file,indent=4)
+    votes = {}
+
+    for i in range(candidats):
+        liste_votes.append(votes)
+    
+    with open("votes.json","w") as write:
+        json.dump(liste_votes,write,indent=4)

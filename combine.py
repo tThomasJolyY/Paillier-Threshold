@@ -51,4 +51,4 @@ def decrypt(s,delta,pubkey,nbserv,c=0):
     #p2 = (1/(4*pubkey["teta"]*(delta**2))) % n
     #print("on trouve = ",p2)
     m = (p1*p2)%n
-    print("m:",m)
+    return m

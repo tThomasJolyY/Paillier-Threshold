@@ -1,5 +1,5 @@
 const { spawn } = require('child_process');
-const python = spawn('python', ['backend.py']);
+const python = spawn('python', ['ptitest.py']);
 
 python.stdout.on('data', (data) => {
     console.log(`stdout: ${data}`);
