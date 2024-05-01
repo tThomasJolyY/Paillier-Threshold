@@ -1,10 +1,17 @@
 import os
 from os import path
-
+import json
 
 """
 This program is used once the vote has ended and we need to delete the remaining files
 """
+
+
+with open("globalConf.json","r") as read_file:
+  conf = json.load(read_file)
+
+for i in range(conf["nbserv"]):
+  os.system("rm -r serveur"+str(i+1))
 
 if path.exists("pubkey.json"):
   os.remove("pubkey.json")
