@@ -18,7 +18,7 @@ serveurs.)
 with open("pubkey.json","r") as read_file:
     pubkey = json.load(read_file)
 
-with open("serveur"+str(indice)+"/secretkey.json","r") as read_file:
+with open("secretkey.json","r") as read_file:
     secret_keys = json.load(read_file)
 
 with open("globalConf.json","r") as read_file:
@@ -38,5 +38,5 @@ for i in range(conf["candidats"]):
     liste_ci.append(dechiffrer(finalc,conf["delta"],secret_keys["1"],pubkey["n"]))
 
     #modifier ca pour que chaque serv ajoute son dechifré
-with open("serveur"+str(indice)+"/serveur"+str(indice)+"ci.json","w") as write_file:
+with open("serveur"+str(indice)+"ci.json","w") as write_file:
   json.dump(liste_ci,write_file,indent=4)

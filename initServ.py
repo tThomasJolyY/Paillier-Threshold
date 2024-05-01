@@ -1,5 +1,6 @@
 import os
 import json
+import shutil
 
 with open("globalConf.json","r") as read_file:
   conf = json.load(read_file)
@@ -11,12 +12,12 @@ for i in range(conf["nbserv"]):
   os.system("mkdir serveur"+str(i+1))
   with open("secretkey.json","w") as write:
     json.dump({"1":secret_keys[str(i+1)]},write,indent=4)
-  os.system("mv secretkey.json serveur"+str(i+1))
-  os.system("cp backendDecrypt.py serveur"+str(i+1))
-  os.system("cp globalConf.json serveur"+str(i+1))
-  os.system("cp votes.json serveur"+str(i+1))
-  os.system("cp pubkey.json serveur"+str(i+1))
-  os.system("cp homomorphe.py serveur"+str(i+1))
-  os.system("cp dechifrer.py serveur"+str(i+1))
-  os.system("cp generatefunctions.py serveur"+str(i+1))
+  shutil.copyfile("secretkey.json","serveur"+str(i+1)+"/secretkey.json")
+  shutil.copyfile("backendDecrypt.py","serveur"+str(i+1)+"/backendDecrypt.py")
+  shutil.copyfile("globalConf.json", "serveur"+str(i+1)+"/globalConf.json")
+  shutil.copyfile("votes.json", "serveur"+str(i+1)+"/votes.json")
+  shutil.copyfile("pubkey.json", "serveur"+str(i+1)+"/pubkey.json")
+  shutil.copyfile("homomorphe.py", "serveur"+str(i+1)+"/homomorphe.py")
+  shutil.copyfile("dechifrer.py", "serveur"+str(i+1)+"/dechifrer.py")
+  shutil.copyfile("generatefunctions.py", "serveur"+str(i+1)+"/generatefunctions.py")
   
