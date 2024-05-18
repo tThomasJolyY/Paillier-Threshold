@@ -20,4 +20,5 @@ for i in range(conf["nbserv"]):
   shutil.copyfile("homomorphe.py", "serveur"+str(i+1)+"/homomorphe.py")
   shutil.copyfile("dechifrer.py", "serveur"+str(i+1)+"/dechifrer.py")
   shutil.copyfile("generatefunctions.py", "serveur"+str(i+1)+"/generatefunctions.py")
+  os.remove("secretkey.json")
   

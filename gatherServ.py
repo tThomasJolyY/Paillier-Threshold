@@ -7,7 +7,7 @@ with open("globalConf.json","r") as read_file:
 liste_ci = {}
 
 for i in range(conf["nbserv"]):
-  with open("serveur"+str(i+1)+"/serveur"+str(i+1)+"ci.json","r") as read_file:
+  with open("serveur"+str(i+1)+"ci.json","r") as read_file:
     ci = json.load(read_file)
   liste_ci[i] = ci
 

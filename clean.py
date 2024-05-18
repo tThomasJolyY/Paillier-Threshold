@@ -13,6 +13,7 @@ with open("globalConf.json","r") as read_file:
 
 for i in range(conf["nbserv"]):
   shutil.rmtree("serveur"+str(i+1))
+  os.remove("serveur"+str(i+1)+"ci.json")
 
 if path.exists("pubkey.json"):
   os.remove("pubkey.json")

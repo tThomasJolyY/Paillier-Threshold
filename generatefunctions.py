@@ -88,21 +88,6 @@ def calcbigpower(g,a,t):
             return g*ghalf*ghalf % t
 
 '''
-On utilise ca ?
-'''
-
-def exp_func(x, y,t):
-    exp = bin(y)
-    value = x
- 
-    for i in range(3, len(exp)):
-        value = value * value
-        if(exp[i:i+1]=='1'):
-            value = value*x%t
-    return value
-
-
-'''
 Cette fonction effectue le rôle de la fonction F (appelé lors de l'initialisation des 
 ski)
 '''
@@ -124,13 +109,13 @@ def generate(nbserv,tm,delta):
     q,q_prim = find_prime()
 
     #print("différence |p-q| :",math.log2(abs(p-q)))
-    while math.log2(abs(p-q)) < 1022:
+    while math.log2(abs(p-q)) < 1010:
         p,p_prim = find_prime()
         q,q_prim = find_prime()
         #print("différence |p-q| :",math.log2(abs(p-q)))
 
-    print("p-1:",p-1)
-    print("q-1:",q-1)
+    #print("p-1:",p-1)
+    #print("q-1:",q-1)
 
     #print("On calcule m,n,beta,a et b...")
     m = p_prim*q_prim
@@ -153,7 +138,7 @@ def generate(nbserv,tm,delta):
 
     betam = beta * m
 
-    print("voici sk:",betam)
+    #print("voici sk:",betam)
     #sk = betam
     
     a0 = betam

@@ -1,8 +1,5 @@
 from generatefunctions import calcbigpower,exp_func
 import sys
-import json
-import math
-from decimal import Decimal
 
 sys.setrecursionlimit(1000000)
 
@@ -20,8 +17,7 @@ def usoj(delta,j,nbserv):
 def lfunc(u,n):
     return (u-1)//n
 
-def decrypt(s,delta,pubkey,nbserv,c=0):
-    n = pubkey["n"]
+def decrypt(s,delta,teta,n,nbserv,c=0):
     t = n**2
     res = 1
     for i in range(len(s)):
@@ -29,6 +25,6 @@ def decrypt(s,delta,pubkey,nbserv,c=0):
         inter = pow(s[i],pui,t)
         res = res * inter % t
     p1 = lfunc(res,n)
-    p2 = pow(4*pubkey["teta"]*(delta**2),-1,n)
+    p2 = pow(4*teta*(delta**2),-1,n)
     m = (p1*p2)%n
     return m
